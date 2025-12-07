@@ -1,11 +1,68 @@
-project "assimp"
-  kind "StaticLib"
-  language "C++"
-  cppdialect "C++17"
-  staticruntime "on"
+﻿project "assimp"
+	kind "StaticLib"
+	language "C++"
 
-  targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-  objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir (bin_dir .. "/Libs/Vendor/%{prj.name}")
+	objdir (int_dir .. "Libs/Vendor/%{prj.name}")
+
+	files {
+		"include/**",
+		"code/Assimp.cpp",
+		"code/BaseImporter.cpp",
+		"code/ColladaLoader.cpp",
+		"code/ColladaParser.cpp",
+		"code/CreateAnimMesh.cpp",
+		"code/PlyParser.cpp",
+		"code/PlyLoader.cpp",
+		"code/BaseProcess.cpp",
+		"code/EmbedTexturesProcess.cpp",
+		"code/ConvertToLHProcess.cpp",
+		"code/DefaultIOStream.cpp",
+		"code/DefaultIOSystem.cpp",
+		"code/DefaultLogger.cpp",
+		"code/GenVertexNormalsProcess.cpp",
+		"code/Importer.cpp",
+		"code/ImporterRegistry.cpp",
+		"code/MaterialSystem.cpp",
+		"code/PostStepRegistry.cpp",
+		"code/ProcessHelper.cpp",
+		"code/scene.cpp",
+		"code/ScenePreprocessor.cpp",
+		"code/ScaleProcess.cpp",
+		"code/SGSpatialSort.cpp",
+		"code/SkeletonMeshBuilder.cpp",
+		"code/SpatialSort.cpp",
+		"code/TriangulateProcess.cpp",
+		"code/ValidateDataStructure.cpp",
+		"code/Version.cpp",
+		"code/VertexTriangleAdjacency.cpp",
+		"code/ObjFileImporter.cpp",
+		"code/ObjFileMtlImporter.cpp",
+		"code/ObjFileParser.cpp",
+		"code/glTFImporter.cpp",
+		"code/glTF2Importer.cpp",
+		"code/MakeVerboseFormat.cpp",
+		"code/CalcTangentsProcess.cpp",
+		"code/ScaleProcess.cpp",
+		"code/EmbedTexturesProcess.cpp",
+		"contrib/irrXML/*",
+	}
+
+	includedirs {
+		"include",
+		"contrib/irrXML",
+		"contrib/zlib",
+		"contrib/rapidjson/include",
+	}
+
+	dependson {
+		-- nil
+	}
+
+	links {
+		-- nil
+	}
+	
 
   defines {
       -- "SWIG",
@@ -91,64 +148,24 @@ project "assimp"
       "ASSIMP_BUILD_NO_GLOBALSCALE_PROCESS",
   }
 
-  files {
-      "include/**",
-      "code/Assimp.cpp",
-      "code/BaseImporter.cpp",
-      "code/ColladaLoader.cpp",
-      "code/ColladaParser.cpp",
-      "code/CreateAnimMesh.cpp",
-      "code/PlyParser.cpp",
-      "code/PlyLoader.cpp",
-      "code/BaseProcess.cpp",
-      "code/EmbedTexturesProcess.cpp",
-      "code/ConvertToLHProcess.cpp",
-      "code/DefaultIOStream.cpp",
-      "code/DefaultIOSystem.cpp",
-      "code/DefaultLogger.cpp",
-      "code/GenVertexNormalsProcess.cpp",
-      "code/Importer.cpp",
-      "code/ImporterRegistry.cpp",
-      "code/MaterialSystem.cpp",
-      "code/PostStepRegistry.cpp",
-      "code/ProcessHelper.cpp",
-      "code/scene.cpp",
-      "code/ScenePreprocessor.cpp",
-      "code/ScaleProcess.cpp",
-      "code/SGSpatialSort.cpp",
-      "code/SkeletonMeshBuilder.cpp",
-      "code/SpatialSort.cpp",
-      "code/TriangulateProcess.cpp",
-      "code/ValidateDataStructure.cpp",
-      "code/Version.cpp",
-      "code/VertexTriangleAdjacency.cpp",
-      "code/ObjFileImporter.cpp",
-      "code/ObjFileMtlImporter.cpp",
-      "code/ObjFileParser.cpp",
-      "code/glTFImporter.cpp",
-      "code/glTF2Importer.cpp",
-      "code/MakeVerboseFormat.cpp",
-      "code/CalcTangentsProcess.cpp",
-      "code/ScaleProcess.cpp",
-      "code/EmbedTexturesProcess.cpp",
-      "contrib/irrXML/*",
-  }
+	filter "system:windows"
+		systemversion "latest"
+		cppdialect "C++17"
+		staticruntime "off"
 
-  includedirs {
-      "include",
-      "contrib/irrXML",
-      "contrib/zlib",
-      "contrib/rapidjson/include",
-  }
+	filter "configurations:Debug"
+		defines { "_DEBUG" }
+		runtime "Debug"
+		symbols "on"
 
+	filter "configurations:Profile"
+		defines { "NDEBUG" }
+		runtime "Release"
+		optimize "on"
 
-   filter "system:windows"
-      systemversion "latest"
+	filter "configurations:Release"
+		defines { "NDEBUG" }
+		runtime "Release"
+		optimize "on"
 
-   filter  "configurations:Debug"
-       runtime "Debug"
-       symbols "on"
-
-   filter  "configurations:Release"
-       runtime "Release"
-       optimize "on"
+	filter {}
