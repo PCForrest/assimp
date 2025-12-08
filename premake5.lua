@@ -3,7 +3,7 @@
 	language "C++"
 
 	targetdir (bin_dir .. "/Libs/Vendor/%{prj.name}")
-	objdir (int_dir .. "Libs/Vendor/%{prj.name}")
+	objdir (int_dir .. "/Libs/Vendor/%{prj.name}")
 
 	files {
 		"include/**",
