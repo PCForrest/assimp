@@ -297,7 +297,7 @@ public: // static utilities
      *
      *  @param data File buffer to be converted to UTF8 data. The buffer
      *  is resized as appropriate. */
-    static void ConvertToUTF8(
+    static void ConvertToUTF16(
         std::vector<char>& data);
 
     // -------------------------------------------------------------------

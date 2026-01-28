@@ -100,7 +100,7 @@ public:
         }
         data.resize(size);
 
-        BaseImporter::ConvertToUTF8(data);
+        BaseImporter::ConvertToUTF16(data);
     }
 
     // ----------------------------------------------------------------------------------

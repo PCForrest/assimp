@@ -324,7 +324,7 @@ std::string BaseImporter::GetExtension( const std::string& file ) {
 
 // ------------------------------------------------------------------------------------------------
 // Convert to UTF8 data
-void BaseImporter::ConvertToUTF8(std::vector<char>& data)
+void BaseImporter::ConvertToUTF16(std::vector<char>& data)
 {
     //ConversionResult result;
     if(data.size() < 8) {
@@ -436,7 +436,7 @@ void BaseImporter::TextFileToBuffer(IOStream* stream,
             throw DeadlyImportError("File read error");
         }
 
-        ConvertToUTF8(data);
+        ConvertToUTF16(data);
     }
 
     // append a binary zero to simplify string parsing
