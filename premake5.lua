@@ -1,4 +1,6 @@
-﻿project "assimp"
+﻿local project_name = "assimp"
+
+project (project_name)
 	kind "StaticLib"
 	language "C++"
 
